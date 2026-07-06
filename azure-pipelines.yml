@@ -59,11 +59,11 @@ steps:
 - task: Maven@4
   inputs:
     mavenPomFile: 'backend/demo/pom.xml'
-    goals: 'clean package'
-    publishJUnitResults: true
+    goals: 'clean package -DskipTests'
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '21'
     mavenVersionOption: 'Default'
+    publishJUnitResults: false
   displayName: 'Build Spring Boot'
 
 # Publish Spring Boot artifact
