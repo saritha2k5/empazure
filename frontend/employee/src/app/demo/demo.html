@@ -1,0 +1,213 @@
+<!--<h2 *ngIf="isLoggedIn">Welcome User!</h2>
+<p *ngIf="!isLoggedIn">Please login</p>
+<ul>
+  <li *ngFor="let emp of employees">
+    {{ emp.id }} - {{ emp.name }}
+  </li>
+</ul>
+
+<div [ngSwitch]="status">
+
+  <p *ngSwitchCase="'approved'">
+    Request Approved
+  </p>
+
+  <p *ngSwitchCase="'pending'">
+    Request Pending
+  </p>
+
+  <p *ngSwitchCase="'rejected'">
+    Request Rejected
+  </p>
+
+  <p *ngSwitchDefault>
+    Unknown Status
+  </p>
+
+</div>
+
+<p [ngClass]="{'text-danger': true}">
+  Error Message
+</p>
+
+
+<p [ngClass]="{
+  'text-success': isSuccess,
+  'text-danger': !isSuccess
+}">
+  Status
+</p>
+
+<p [ngStyle]="{
+  color: 'blue',
+  'font-size': '20px'
+}">
+  Styled Text
+</p>
+
+
+<p appHighlight>
+  Highlighted Text
+</p>
+
+
+
+<p appHover>
+  Move your mouse here.
+</p>
+
+<p Highlight>
+  Highlighted Text
+</p>
+
+<p appActive>
+  Hover over me
+</p>
+<button (click)="showMessage()">Click Me</button>
+
+<p>{{ message }}</p>
+
+<input type="text" [(ngModel)]="username">
+
+<p>Welcome {{ username }}</p>
+
+<h2
+  [style.color]="textColor"
+  [style.font-size.px]="fontSize">
+  Angular Style Binding
+</h2>
+<button (click)="textColor = 'red'">Make Red</button>
+
+<h2>{{ name1 | uppercase }}</h2>
+<h2>{{ name1 | lowercase }}</h2>
+<p>{{ today | date }}</p>
+<p>{{ today | date:'short' | uppercase}}</p>
+<p>{{ today | date:'fullDate' | uppercase }}</p>
+<p>{{ today | date:'dd/MM/yyyy' }}</p>
+<p>{{price | currency}}</p>
+<p>{{ price | currency }}</p>
+<p>{{ price | currency:'INR' }}</p>
+<p>{{ price | currency:'USD' }}</p>
+<p>{{ price | currency:'EUR' }}</p>
+
+
+<form [formGroup]="empform" (ngSubmit)="submit()">
+
+  <label>Name:</label>
+  <input
+    type="text"
+    name="name"
+    [(ngModel)]="user.name"
+    required>
+
+  <br><br>
+
+  <label>Email:</label>
+  <input
+    type="email"
+    name="email"
+    [(ngModel)]="user.email"
+    required>
+
+  <br><br>
+
+  <button type="submit">Submit</button>
+
+</form>
+
+<form [formGroup]="employeeForm" (ngSubmit)="submit()">
+
+   Name
+  <label>Name</label>
+  <input type="text" formControlName="name">
+
+  @if (employeeForm.get('name')?.touched &&
+       employeeForm.get('name')?.hasError('required')) {
+    <div style="color:red;">
+      Name is required.
+    </div>
+  }
+
+  @if (employeeForm.get('name')?.touched &&
+       employeeForm.get('name')?.hasError('minlength')) {
+    <div style="color:red;">
+      Name must be at least 3 characters long.
+    </div>
+  }
+
+  <br><br>
+
+   Email 
+  <label>Email</label>
+  <input type="email" formControlName="email">
+
+  @if (employeeForm.get('email')?.touched &&
+       employeeForm.get('email')?.hasError('required')) {
+    <div style="color:red;">
+      Email is required.
+    </div>
+  }
+
+  @if (employeeForm.get('email')?.touched &&
+       employeeForm.get('email')?.hasError('email')) {
+    <div style="color:red;">
+      Please enter a valid email address.
+    </div>
+  }
+
+  <br><br>
+
+  <button type="submit" [disabled]="employeeForm.invalid">
+    Save
+  </button>
+
+</form>
+-->
+<h2>Form builder example</h2>
+
+<form [formGroup]="empform" (ngSubmit)="submit()">
+
+  <label>Name</label>
+  <input type="text" formControlName="empname">
+  <div *ngIf="empform.get('empname')?.touched && empform.get('empname')?.invalid">
+    <small *ngIf="empform.get('empname')?.hasError('required')">
+      Name is required.
+    </small>
+    <small *ngIf="empform.get('empname')?.hasError('minlength')">
+      Name must be at least 3 characters.
+    </small>
+  </div>
+
+  <br><br>
+
+  <label>Email</label>
+  <input type="email" formControlName="empemail">
+  <div *ngIf="empform.get('empemail')?.touched && empform.get('empemail')?.invalid">
+    <small *ngIf="empform.get('empemail')?.hasError('required')">
+      Email is required.
+    </small>
+    <small *ngIf="empform.get('empemail')?.hasError('email')">
+      Enter a valid email address.
+    </small>
+  </div>
+
+  <br><br>
+
+  <label>Phone Number</label>
+  <input type="text" formControlName="phonenumber">
+  <div *ngIf="empform.get('phonenumber')?.touched && empform.get('phonenumber')?.invalid">
+    <small *ngIf="empform.get('phonenumber')?.hasError('required')">
+      Phone number is required.
+    </small>
+    <small *ngIf="empform.get('phonenumber')?.hasError('pattern')">
+      Enter a valid 10-digit mobile number.
+    </small>
+  </div>
+
+  <br><br>
+
+  <button type="submit" [disabled]="empform.invalid">
+    Submit
+  </button>
+
+</form>

@@ -1,0 +1,165 @@
+<div class="container mt-5">
+  <div class="card shadow-lg border-0 rounded-4">
+
+    <div class="card-header bg-primary text-white py-3">
+      <h3 class="mb-0 text-center">
+        Employee Management System
+      </h3>
+    </div>
+
+    <div class="card-body">
+      <div class="table-responsive">
+
+        <table class="table table-hover table-bordered align-middle text-center">
+
+          <thead class="table-dark">
+            <tr>
+              <th>#</th>
+              <th>Employee Name</th>
+              <th>Email</th>
+              <th>Salary</th>
+              <th>Status</th>
+              <th>Department</th>
+              <th width="180">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <tr *ngFor="let emp of employees; let i = index">
+
+              <td>{{ i + 1 }}</td>
+
+              <!-- Name -->
+              <td>
+                <span *ngIf="editingId !== emp.emp_id">
+                  {{ emp.emp_name }}
+                </span>
+
+                <input
+                  *ngIf="editingId === emp.emp_id"
+                  class="form-control"
+                  [(ngModel)]="emp.emp_name">
+              </td>
+
+              <!-- Email -->
+              <td>
+                <span *ngIf="editingId !== emp.emp_id">
+                  {{ emp.email }}
+                </span>
+
+                <input
+                  *ngIf="editingId === emp.emp_id"
+                  class="form-control"
+                  [(ngModel)]="emp.email">
+              </td>
+
+              <!-- Salary -->
+              <td>
+                <span *ngIf="editingId !== emp.emp_id">
+                  {{ emp.salary | currency:'INR':'symbol':'1.0-0' }}
+                </span>
+
+                <input
+                  *ngIf="editingId === emp.emp_id"
+                  type="number"
+                  class="form-control"
+                  [(ngModel)]="emp.salary">
+              </td>
+
+              <!-- Status -->
+              <td>
+
+                <span
+                  *ngIf="editingId !== emp.emp_id"
+                  class="badge"
+                  [ngClass]="emp.status === 'Active' ? 'bg-success' : 'bg-danger'">
+                  {{ emp.status }}
+                </span>
+
+                <select
+                  *ngIf="editingId === emp.emp_id"
+                  class="form-select"
+                  [(ngModel)]="emp.status">
+
+                  <option value="Active">Active</option>
+                  <option value="Inactive">Inactive</option>
+
+                </select>
+
+              </td>
+
+              <!-- Department -->
+<td>
+
+  <!-- Display mode -->
+  <span *ngIf="editingId !== emp.emp_id">
+    {{ emp.department?.dept_name }}
+  </span>
+
+  <!-- Edit mode -->
+  <select
+    *ngIf="editingId === emp.emp_id"
+    class="form-select"
+    [(ngModel)]="emp.department.dept_name">
+
+    <option value="IT">IT</option>
+    <option value="HR">HR</option>
+    <option value="Finance">Finance</option>
+
+  </select>
+
+</td>
+              <!-- Buttons -->
+              <td>
+
+                <!-- Edit -->
+                <button
+                  *ngIf="editingId !== emp.emp_id"
+                  class="btn btn-warning btn-sm me-2"
+                  (click)="editEmployee(emp)">
+                  ✏️ Edit
+                </button>
+
+                <!-- Save -->
+                <button
+                  *ngIf="editingId === emp.emp_id"
+                  class="btn btn-success btn-sm me-2"
+                  (click)="saveEmployee(emp)">
+                  💾 Save
+                </button>
+
+                <!-- Cancel -->
+                <button
+                  *ngIf="editingId === emp.emp_id"
+                  class="btn btn-secondary btn-sm me-2"
+                  (click)="cancelEdit()">
+                  ❌ Cancel
+                </button>
+
+                <!-- Delete -->
+                <button
+                  class="btn btn-danger btn-sm"
+                  (click)="deleteEmployee(emp.emp_id)">
+                  🗑️ Delete
+                </button>
+
+              </td>
+
+            </tr>
+
+            <tr *ngIf="employees.length === 0">
+              <td colspan="7">
+                No employees found.
+              </td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+    </div>
+
+  </div>
+</div>

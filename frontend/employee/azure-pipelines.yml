@@ -1,0 +1,19 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+
+- task: NodeTool@0
+  inputs:
+    versionSpec: '22.x'
+
+- script: |
+    npm install
+    npm run build
+  workingDirectory: frontend
+
+- publish: frontend/dist
+  artifact: angular-build

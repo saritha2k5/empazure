@@ -1,0 +1,49 @@
+<h2>Employee Registration Form</h2>
+
+<form #empForm="ngForm" (ngSubmit)="Employee()">
+
+  <label>Employee Name:</label><br>
+  <input
+    type="text"
+    name="emp_name"
+    [(ngModel)]="employee.emp_name"
+    required>
+  <br><br>
+  <label>Email:</label><br>
+  <input
+    type="email"
+    name="email"
+    [(ngModel)]="employee.email"
+    required>
+  <br><br>
+
+  <label>Department:</label><br>
+  <select
+    name="department"
+    [(ngModel)]="employee.department"
+    required>
+
+    <option [ngValue]="null">Select Department</option>
+    <option [ngValue]="{ dept_id: 1, dept_name: 'HR' }">HR</option>
+    <option [ngValue]="{ dept_id: 2, dept_name: 'IT' }">IT</option>
+    <option [ngValue]="{ dept_id: 3, dept_name: 'Finance' }">Finance</option>
+    <option [ngValue]="{ dept_id: 4, dept_name: 'Marketing' }">Marketing</option>
+  </select>
+  <br><br>
+
+  <label>Salary:</label><br>
+  <input
+    type="number"
+    name="salary"
+    [(ngModel)]="employee.salary"
+    required>
+  <br><br>
+
+  <button type="submit" [disabled]="empForm.invalid">
+    Register
+  </button>
+
+</form>
+
+<hr>
+

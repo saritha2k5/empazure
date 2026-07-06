@@ -1,0 +1,16 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Department_Id</th>
+      <th>Department_Name</th>
+    
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let dept of departments">
+      <td>{{ dept.dept_id }}</td>
+      <td>{{ dept.dept_name }}</td>
+      
+    </tr>
+  </tbody>
+</table><p>departmentcomponent works!</p>
